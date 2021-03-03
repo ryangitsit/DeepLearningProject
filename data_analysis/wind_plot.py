@@ -17,7 +17,7 @@ def get_data():
 
 def plot_power(wind_dat):
 
-    plt.plot(wind_dat['Time'][146:1000], wind_dat['ActivePower'][146:1000])
+    plt.plot(np.arange(1,1000,1), wind_dat['ActivePower'][1:1000])
     plt.title("Wind Power Output over Time")
     plt.xlabel("Time (10-minute Intervals)")
     plt.ylabel("Active Power")
