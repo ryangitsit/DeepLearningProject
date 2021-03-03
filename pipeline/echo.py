@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 from scipy import linalg 
 # numpy.linalg is also an option for even fewer dependencies
 
-def echo_state_network(dataset):
+def echo_state_network(input_data):
     # load the data
     trainLen = 2000
     testLen = 2000
     initLen = 100
-    data = np.loadtxt(dataset)
+    data = input_data
 
     # plot some of it
     plt.figure(10).clear()
