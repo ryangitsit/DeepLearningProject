@@ -3,7 +3,7 @@ import tensorflow_addons as tfa
 
 
 def keras_esn(input_data):
-    
+
     esn_model = tfa.layers.ESN(
             units: tfa.types.TensorLike,
             connectivity: tfa.types.FloatTensorLike = 0.1,
