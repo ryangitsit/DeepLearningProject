@@ -1,26 +1,35 @@
-import tensorflow
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 import tensorflow_addons as tfa
 
+from esn_cell import ESNCell
 
-def keras_esn(input_data):
 
-    esn_model = tfa.layers.ESN(
-            units: tfa.types.TensorLike,
-            connectivity: tfa.types.FloatTensorLike = 0.1,
-            leaky: tfa.types.FloatTensorLike = 1,
-            spectral_radius: tfa.types.FloatTensorLike = 0.9,
-            use_norm2: bool = False,
-            use_bias: bool = True,
-            activation: tfa.types.Activation = 'tanh',
-            kernel_initializer: tfa.types.Constraint = 'glorot_uniform',
-            recurrent_initializer: tfa.types.Constraint = 'glorot_uniform',
-            bias_initializer: tfa.types.Constraint = 'zeros',
-            return_sequences=False,
-            go_backwards=False,
-            unroll=False,
-            **kwargs
-            )
+def keras_esn(inputs, outputs):
 
-    esn_fit = esn_model.fit(input_data)
+        # model = keras.Sequential()
+        # # Add an Embedding layer expecting input vocab of size 1000, and
+        # # output embedding dimension of size 64.
+        # model.add(layers.Embedding(input_dim=1000, output_dim=64))
 
-    return esn_model
+        # # Add a ESN layer with 128 internal units.
+        # model.add(tfa.layers.ESN(128))
+
+        # # Add a Dense layer with 10 units.
+        # model.add(layers.Dense(10))
+
+        # model.summary()
+
+        # # how to optimize if output is just linear regression?
+        # model.compile(
+        # optimizer=None,
+        # loss='binary_crossentropy',
+        # metrics=['accuracy'],
+        # )
+
+        # run = model.fit(inputs=inputs, outputs=outputs)  # can here also specifiy epochs
+        
+
+        return None

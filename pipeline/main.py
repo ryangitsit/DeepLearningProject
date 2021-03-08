@@ -24,9 +24,7 @@ def main():
         echo_state_network(input_data)
 
     else:
-        keras_esn(input_data)
-
-
+        keras_esn(input_data, input_data)
 
 
 if __name__ == "__main__":
