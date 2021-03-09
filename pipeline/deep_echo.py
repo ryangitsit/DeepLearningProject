@@ -1,31 +1,18 @@
-# -*- coding: utf-8 -*-
-"""
-A minimalistic Echo State Networks demo with Mackey-Glass (delay 17) data 
-in "plain" scientific Python.
-from https://mantas.info/code/simple_esn/
-(c) 2012-2020 Mantas LukoÅ¡eviÄ ius
-Distributed under MIT license https://opensource.org/licenses/MIT
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import linalg 
 # numpy.linalg is also an option for even fewer dependencies
 
-def echo_state_network(input_data, regu, reservoir):
+def echo_state_network(input_data, regu):
     # load the data
     trainLen = 2000
     testLen = 2000
     initLen = 100
     data = input_data
 
-    # plot some of it
-    # plt.figure(10).clear()
-    # plt.plot(data[:10000])
-    # plt.title('A sample of data')
-
     # generate the ESN reservoir
     inSize = outSize = 1
-    resSize = reservoir
+    resSize = 10000
     a = 0.3 # leaking rate
     np.random.seed(42)
     Win = (np.random.rand(resSize,1+inSize) - 0.5) * 1
@@ -77,20 +64,4 @@ def echo_state_network(input_data, regu, reservoir):
     mse = sum( np.square( data[trainLen+1:trainLen+errorLen+1] - 
         Y[0,0:errorLen] ) ) / errorLen
     print('MSE = ' + str( mse ))
-        
-    # plot some signals
-    plt.figure(1).clear()
-    plt.plot( data[trainLen+1:trainLen+testLen+1], 'g' )
-    plt.plot( Y.T, 'b' )
-    plt.title(f'Target and generated signals $y(n)$ starting at $n=0$, with {regu} reg')
-    plt.legend(['Target signal', 'Free-running predicted signal'])
 
-    plt.figure(2).clear()
-    plt.plot( X[0:20,0:200].T )
-    plt.title(r'Some reservoir activations $\mathbf{x}(n)$')
-
-    plt.figure(3).clear()
-    plt.bar( np.arange(1+inSize+resSize), Wout[0].T )
-    plt.title(r'Output weights $\mathbf{W}^{out}$')
-
-    plt.show()

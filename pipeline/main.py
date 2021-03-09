@@ -21,7 +21,11 @@ def main():
     input_data = create_dataset(config.data)
 
     if config.network == 'mantas':
-        echo_state_network(input_data)
+        echo_state_network(input_data, 9, 1000)
+        # echo_state_network(input_data, .006, 5000)
+        # for i in range(5,10):
+        #     echo_state_network(input_data, i, 1000)
+        
 
     else:
         keras_esn(input_data, input_data)
