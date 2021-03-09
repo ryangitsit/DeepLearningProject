@@ -19,9 +19,9 @@ def echo_state_network(input_data):
     data = input_data
 
     # plot some of it
-    plt.figure(10).clear()
-    plt.plot(data[:1000])
-    plt.title('A sample of data')
+    # plt.figure(10).clear()
+    # plt.plot(data[:10000])
+    # plt.title('A sample of data')
 
     # generate the ESN reservoir
     inSize = outSize = 1
@@ -50,7 +50,7 @@ def echo_state_network(input_data):
             X[:,t-initLen] = np.vstack((1,u,x))[:,0]
         
     # train the output by ridge regression
-    reg = 1e-8  # regularization coefficient
+    reg = 1e-5  # regularization coefficient
     # direct equations from texts:
     #X_T = X.T
     #Wout = np.dot( np.dot(Yt,X_T), linalg.inv( np.dot(X,X_T) + \

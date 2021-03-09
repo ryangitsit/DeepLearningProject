@@ -7,7 +7,7 @@ from keras_echo import keras_esn
 def arg_parse():
     parser = argparse.ArgumentParser()
     parser.add_argument("--network", help = "Hidden layer activation function", choices = ['keras', 'mantas'], type = str, default = 'mantas')
-    parser.add_argument("--data", help = "Hidden layer activation function", choices = ['mackey', 'wind', 'weather'], type = str, default = 'mackey')
+    parser.add_argument("--data", help = "Hidden layer activation function", choices = ['mackey', 'wind', 'weather', 'chest', 'sine'], type = str, default = 'mackey')
     return parser.parse_args()
     
 log = logger.setup_logger(__name__)

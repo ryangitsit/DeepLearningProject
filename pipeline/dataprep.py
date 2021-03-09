@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 """
 - The create_dataset function formats data for the echo state network.
@@ -9,7 +10,7 @@ import pandas as pd
 def get_csv_data(dataset):
 
     df = pd.read_csv("./datasets/" + dataset + ".csv", sep=',')
-    print (df.columns)
+    #print (df.columns)
     return df
 
 def create_dataset(dataset):
@@ -21,63 +22,37 @@ def create_dataset(dataset):
 
     elif dataset == "wind":
         input_data = get_csv_data(dataset)['ActivePower']
-        input_data = np.array(input_data.dropna())
+        input_data = np.array(input_data.dropna())/1700
 
 
     elif dataset == "weather":
         
-        input_data = get_csv_data(dataset) #[' _tempm']
-        input_data = np.array(input_data.dropna())
+        input_data = get_csv_data(dataset)[' _tempm']
+        input_data = np.array(input_data.dropna())[0:10000]/70
+
+    elif dataset == "chest":
+        input_data = get_csv_data('subject2_chest_1st100k')['Chest_ECG'][:10000]
+        input_data = np.array(input_data)
+
+
+    elif dataset == 'sine':
+        x = .1*np.arange(0, 10000, 1)
+        input_data = np.array(np.sin(x))
         
+    print (f"Input data shape for {dataset} = {input_data.shape} \n of type: {type(input_data)}")
+
+    def close_event():
+        plt.close()
+    fig = plt.figure()
+    timer = fig.canvas.new_timer(interval = 2000) #creating a timer object and setting an interval of 3000 milliseconds
+    timer.add_callback(close_event)
+    timer.start()
+    plt.plot(input_data[:1000])
+    plt.title(f'A sample of {dataset} time series')
+    plt.show()
+    timer.stop()
+
     return input_data
 
-
-
-# def data_split(input_data):
-#     pass
-    
-# class WindowGenerator():
-#   def __init__(self, input_width, label_width, shift,
-#                train_df=train_df, val_df=val_df, test_df=test_df,
-#                label_columns=None):
-#     # Store the raw data.
-#     self.train_df = train_df
-#     self.val_df = val_df
-#     self.test_df = test_df
-
-#     # Work out the label column indices.
-#     self.label_columns = label_columns
-#     if label_columns is not None:
-#       self.label_columns_indices = {name: i for i, name in
-#                                     enumerate(label_columns)}
-#     self.column_indices = {name: i for i, name in
-#                            enumerate(train_df.columns)}
-
-#     # Work out the window parameters.
-#     self.input_width = input_width
-#     self.label_width = label_width
-#     self.shift = shift
-
-#     self.total_window_size = input_width + shift
-
-#     self.input_slice = slice(0, input_width)
-#     self.input_indices = np.arange(self.total_window_size)[self.input_slice]
-
-#     self.label_start = self.total_window_size - self.label_width
-#     self.labels_slice = slice(self.label_start, None)
-#     self.label_indices = np.arange(self.total_window_size)[self.labels_slice]
-
-#   def __repr__(self):
-#     return '\n'.join([
-#         f'Total window size: {self.total_window_size}',
-#         f'Input indices: {self.input_indices}',
-#         f'Label indices: {self.label_indices}',
-#         f'Label column name(s): {self.label_columns}'])
-
-
-
-# def make_window():
-#     w1 = WindowGenerator(input_width=24, label_width=1, shift=24,
-#                      label_columns=[' _tempm'])
 
 
