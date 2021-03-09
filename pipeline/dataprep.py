@@ -41,16 +41,16 @@ def create_dataset(dataset):
         
     print (f"Input data shape for {dataset} = {input_data.shape} \n of type: {type(input_data)}")
 
-    def close_event():
-        plt.close()
-    fig = plt.figure()
-    timer = fig.canvas.new_timer(interval = 2000) #creating a timer object and setting an interval of 3000 milliseconds
-    timer.add_callback(close_event)
-    timer.start()
+    # def close_event():
+    #     plt.close()
+    # fig = plt.figure()
+    # timer = fig.canvas.new_timer(interval = 2000) #creating a timer object and setting an interval of 3000 milliseconds
+    # timer.add_callback(close_event)
+    # timer.start()
     plt.plot(input_data[:1000])
     plt.title(f'A sample of {dataset} time series')
     plt.show()
-    timer.stop()
+    # timer.stop()
 
     return input_data
 
